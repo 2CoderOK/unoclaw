@@ -1,4 +1,6 @@
-<img src="assets/unoclaw_text_logo.png" alt="UnoClaw" width="500">
+<p align="center">
+  <img src="assets/unoclaw_text_logo.png" alt="UnoClaw" width="500">
+</p>
 
 <h1 align="center">🦾 UnoClaw — Minimalistic AI Assistant</h1>
 
@@ -119,7 +121,7 @@ If you provided a `telegram.token`, it will start polling immediately. If omitte
         ▼
 ┌───────────────────────────────┐
 │          UnoClaw              │
-│       (unoclaw.py)            │
+│         (main.py)             │
 │  [Memory & Scheduler loop]    │
 └──────────────┬────────────────┘
         │      │
