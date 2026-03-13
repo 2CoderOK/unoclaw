@@ -27,7 +27,7 @@ try:
 except ImportError:
     Update = None  # Telegram features will be disabled if python-telegram-bot is not installed
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 logger = logging.getLogger("unoclaw")
 
 

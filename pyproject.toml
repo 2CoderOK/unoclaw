@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "unoclaw"
-version = "0.1.0"
+version = "0.1.1"
 description = "Minimalistic AI assistant with tool-calling, Telegram & CLI"
 readme = "README.md"
 license = {text = "MIT"}
