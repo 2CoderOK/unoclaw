@@ -1,4 +1,4 @@
-"""Tests for unoclaw.py — run with: python -m pytest test_unoclaw.py -v"""
+"""Tests for UnoClaw — run with: python -m pytest test_unoclaw.py -v"""
 
 import os
 from unittest.mock import MagicMock, patch
@@ -7,7 +7,7 @@ import pytest
 from pydantic import ValidationError
 
 # Import the module under test
-import unoclaw
+import unoclaw.main as unoclaw
 
 
 # ---------------------------------------------------------------------------
@@ -35,9 +35,7 @@ def setup_test_env(tmp_path):
 # ---------------------------------------------------------------------------
 class TestAppConfig:
     def test_valid_config(self):
-        cfg = unoclaw.AppConfig(
-            llm={"base_url": "http://localhost:8088/v1", "model": "test-model"}
-        )
+        cfg = unoclaw.AppConfig(llm={"base_url": "http://localhost:8088/v1", "model": "test-model"})
         assert cfg.llm.model == "test-model"
         assert cfg.max_context_messages == 40
 
@@ -91,7 +89,7 @@ class TestStandardTools:
         result = unoclaw.read_file(str(outside_file))
         assert "disallowed" in result.lower()
 
-    @patch("unoclaw.urlopen")
+    @patch("unoclaw.main.urlopen")
     def test_read_web_success(self, mock_urlopen):
         # Mock the urllib response
         mock_response = MagicMock()
