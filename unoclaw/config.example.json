@@ -1,0 +1,166 @@
+{
+  "telegram": {
+    "token": "YOUR_TELEGRAM_BOT_TOKEN",
+    "allowed_usernames": [
+      "your_username"
+    ]
+  },
+  "llm": {
+    "base_url": "http://localhost:8088/v1",
+    "api_key": "not-needed",
+    "model": "qwen2.5-7b-instruct"
+  },
+  "system_prompt": "You are UnoClaw - personal AI assistant. Use your tools to help the user.",
+  "logging": {
+    "enabled": true,
+    "file": "unoclaw.log",
+    "level": "INFO"
+  },
+  "workspace": {
+    "path": ".",
+    "restrict": true
+  },
+  "db_name": "unoclaw.db",
+  "scheduler_interval": 60,
+  "max_context_tokens": 8000,
+  "max_context_messages": 10,
+  "memory": {
+    "search_max_results": 10
+  },
+  "tools_schema": [
+    {
+      "type": "function",
+      "function": {
+        "name": "execute_command",
+        "description": "Run shell command",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "command"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read file text",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file",
+        "description": "Write file text",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "read_web",
+        "description": "Fetch URL content",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "url"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "add_task",
+        "description": "Schedule a background task for YOURSELF to execute later.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string",
+              "description": "What you should do when the task fires"
+            },
+            "delay_seconds": {
+              "type": "integer"
+            },
+            "repeat_seconds": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "description",
+            "prompt"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_tasks",
+        "description": "List all background tasks",
+        "parameters": {
+          "type": "object",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "remove_task",
+        "description": "Delete task by ID (0 for all)",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "task_id": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "task_id"
+          ]
+        }
+      }
+    }
+  ]
+}
