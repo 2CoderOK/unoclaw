@@ -177,9 +177,16 @@ Settings live in `config.json`. Missing required fields (like `llm`) will produc
   "workspace": {
     "path": ".",
     "restrict": true
-  }
+  },
+  "max_context_tokens": 8000,
+  "max_context_messages": 40
 }
 ```
+
+### Context Limits & Soft Token Budgets
+To prevent runaway API costs and context-window crashes, UnoClaw manages conversation history using a soft token budget:
+- `max_context_tokens`: UnoClaw estimates the token count of your active conversation. If it exceeds this limit, it automatically prunes the oldest messages (while always preserving your system prompts).
+- `max_context_messages`: The absolute maximum number of back-and-forth messages kept in the active LLM context before older messages are trimmed.
 
 *Note: For the full schema, check `config.example.json`.*
 
@@ -200,7 +207,7 @@ This file defines *what* the agent can do. It is appended directly below the `AG
 
 UnoClaw is designed to be highly hackable. You can give it new superpowers in two ways: by writing plain English workflows (Composite Skills) or by writing native Python functions (Native Tools).
 
-### 1. The "No-Code" Way: Composite Skills (Recommended)
+### 1. The "No-Code" Way: Composite Skills
 Because UnoClaw connects to powerful LLMs, you do not need to write a new Python script for every minor feature. You can simply teach the agent a "workflow" by editing the `SKILLS.md` file and instructing it to use its existing tools (like `read_web` or `read_file`).
 
 To add a new skill, just append a clear, step-by-step instruction block to `SKILLS.md`.
